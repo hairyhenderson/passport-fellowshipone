@@ -1,5 +1,5 @@
 [![Build Status](https://secure.travis-ci.org/hairyhenderson/passport-fellowshipone.svg)](http://travis-ci.org/hairyhenderson/passport-fellowshipone)
-[![Coverage Status](https://coveralls.io/repos/hairyhenderson/passport-fellowshipone/badge.svg)](https://coveralls.io/r/hairyhenderson/passport-fellowshipone)
+[![Coverage Status](https://img.shields.io/coveralls/hairyhenderson/passport-fellowshipone.svg)](https://coveralls.io/r/hairyhenderson/passport-fellowshipone)
 [![Dependency Status](https://gemnasium.com/hairyhenderson/passport-fellowshipone.svg)](https://gemnasium.com/hairyhenderson/passport-fellowshipone)
 
 # Passport-FellowshipOne
