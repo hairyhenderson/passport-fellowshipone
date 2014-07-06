@@ -1,47 +1,45 @@
 {
-  "name": "passport-fellowshipone",
-  "private": true,
-  "version": "0.0.1",
-  "description": "Fellowship One (F1) authentication strategy for Passport.",
-  "keywords": [
-    "passport",
-    "fellowshipone",
-    "F1",
-    "auth",
-    "authn",
-    "authentication",
-    "identity"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/hairyhenderson/passport-fellowshipone.git"
-  },
-  "bugs": {
-    "url": "http://github.com/hairyhenderson/passport-fellowshipone/issues"
-  },
-  "author": {
-    "name": "Dave Henderson",
-    "email": "dhenderson@gmail.com"
-  },
-  "licenses": [
-    {
+   "name": "passport-fellowshipone",
+   "version": "0.0.1",
+   "description": "Fellowship One (F1) authentication strategy for Passport.",
+   "keywords": [
+      "passport",
+      "fellowshipone",
+      "F1",
+      "auth",
+      "authentication",
+      "identity"
+   ],
+   "repository": {
+      "type": "git",
+      "url": "git://github.com/hairyhenderson/passport-fellowshipone.git"
+   },
+   "bugs": {
+      "url": "http://github.com/hairyhenderson/passport-fellowshipone/issues"
+   },
+   "author": {
+      "name": "Dave Henderson",
+      "email": "dhenderson@gmail.com"
+   },
+   "licenses": [{
       "type": "MIT",
       "url": "http://www.opensource.org/licenses/MIT"
-    }
-  ],
-  "main": "./lib/passport-fellowshipone",
-  "dependencies": {
-    "passport-oauth": "~0.1.9",
-    "pkginfo": "0.2.x",
-    "request": "^2.36.0"
-  },
-  "devDependencies": {
-    "vows": "^0.6.0"
-  },
-  "scripts": {
-    "test": "NODE_PATH=lib node_modules/.bin/vows test/*-test.js"
-  },
-  "engines": {
-    "node": ">= 0.8.0"
-  }
+   }],
+   "main": "./lib/passport-fellowshipone",
+   "dependencies": {
+      "passport-oauth": "~0.1.9",
+      "pkginfo": "0.2.x",
+      "request": "^2.36.0"
+   },
+   "devDependencies": {
+      "istanbul": "^0.2.16",
+      "mocha": "^1.20.1",
+      "should": "^4.0.4"
+   },
+   "scripts": {
+      "test": "NODE_ENV=test NODE_PATH=lib node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -R spec"
+   },
+   "engines": {
+      "node": ">= 0.8.0"
+   }
 }
