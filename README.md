@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/hairyhenderson/passport-fellowshipone.png)](http://travis-ci.org/hairyhenderson/passport-fellowshipone)
+
 # Passport-FellowshipOne
 
 [Passport](http://passportjs.org/) strategy for authenticating with [Fellowship One](http://developer.fellowshipone.org) using the OAuth 1.0a API.
@@ -63,9 +65,7 @@ For a complete, working example, refer to the [login example](https://github.com
 ## Tests
 
     $ npm install --dev
-    $ make test
-
-[![Build Status](https://secure.travis-ci.org/hairyhenderson/passport-fellowshipone.png)](http://travis-ci.org/hairyhenderson/passport-fellowshipone)
+    $ npm test
 
 ## Credits
 
