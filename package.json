@@ -38,7 +38,7 @@
       "coveralls": "^2.11.0"
    },
    "scripts": {
-      "test": "NODE_ENV=test NODE_PATH=lib node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -R spec"
+      "test": "make test-coveralls"
    },
    "engines": {
       "node": ">= 0.10.0"
