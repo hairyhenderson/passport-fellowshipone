@@ -7,11 +7,7 @@
 
 [Passport](http://passportjs.org/) strategy for authenticating with [Fellowship One](http://developer.fellowshipone.org) using the OAuth 1.0a API.
 
-This module lets you authenticate using Fellowship One in your Node.js
-applications. By plugging into Passport, Fellowship One authentication can be
-easily and unobtrusively integrated into any application or framework that
-supports [Connect](http://www.senchalabs.org/connect/)-style middleware,
-including [Express](http://expressjs.com/).
+This module lets you authenticate using Fellowship One in your Node.js applications. By plugging into Passport, Fellowship One authentication can be easily and unobtrusively integrated into any application or framework that supports [Connect](http://www.senchalabs.org/connect/)-style middleware, including [Express](http://expressjs.com/).
 
 ## Install
 
@@ -21,43 +17,62 @@ including [Express](http://expressjs.com/).
 
 #### Configure Strategy
 
-The Fellowship One authentication strategy authenticates users using a
-Fellowship One account and OAuth 1.0a tokens. The strategy requires a `verify`
-callback, which accepts these credentials and calls `done` providing a user, as
-well as `options` specifying a developer key and callback URL.
+The Fellowship One authentication strategy authenticates users using a Fellowship One account and OAuth 1.0a tokens. The strategy requires a `verify` callback, which accepts these credentials and calls `done` providing a user, as well as `options` specifying a developer key and callback URL. 
 
-    var FellowshipOneStrategy = require('passport-fellowshipone').Strategy;
+```js
+var FellowshipOneStrategy = require('passport-fellowshipone').Strategy;
 
-    passport.use(new FellowshipOneStrategy({
-		apiURL: 'https://MyChurch.staging.fellowshiponeapi.com/v1',
-        consumerKey: F1_DEVELOPER_KEY,
-        consumerSecret: F1_SECRET,
-        callbackURL: "http://127.0.0.1:3000/auth/fellowshipone/callback"
-      },
-      function(token, tokenSecret, profile, done) {
-        User.findOrCreate({ userId: profile.id }, function (err, user) {
-          return done(err, user);
-        });
-      }
-    ));
+passport.use(new FellowshipOneStrategy({
+    apiURL: 'https://MyChurch.staging.fellowshiponeapi.com/v1',
+    consumerKey: F1_DEVELOPER_KEY,
+    consumerSecret: F1_SECRET,
+    callbackURL: "http://127.0.0.1:3000/auth/fellowshipone/callback"
+  },
+  function verify(token, tokenSecret, profile, done) {
+    User.findOrCreate({ userId: profile.id }, function (err, user) {
+      return done(err, user);
+    });
+  }
+));
+```
+
+##### F1-specific options
+
+To make life a little easier for dealing with Fellowship One's API, you can set these options:
+
+- `churchCode` - Your Fellowship One Church Code. When set, this will be used to automatically build the `apiURL` option.
+- `staging` - _(boolean)_ Whether or not you want to talk to your F1 staging environment (`true`) or your production environment (default).
+- `apiURL` - The base URL for Fellowship One API operations (i.e. `https://yourchurchcode.fellowshiponeapi.com/v1`). You don't need to set this if you already set `churchCode`/`staging`, but sometimes you've already got the URL for other purposes, so it's just as easy. _Setting this will override the `churchCode` and `staging` options._
+
+##### The returned profile
+
+The `verify` callback is given a profile when a user successfully authenticates. The profile is constructed from the user's [F1 Person](http://developer.fellowshipone.com/docs/v1/People.help) record, but only contains a subset of information so that it can be easily linked to a user record in your application.
+
+The profile's properties are:
+
+- `id` - (_Number_) The authenticated user's numeric ID
+- `uri` - The full URI for accessing the user's Person record
+- `displayName` - A name to be used in user-facing views. If the user has a `goesByName` set in their F1 Person record, this will be used, otherwise this is the `firstName` from F1.
+- `fullName` - The user's full name (using `displayName` as the first name)
+- `email` - A _guess_ at the user's primary e-mail address. If they _have_ an e-mail address set as `preferred` in the F1 Person record, this will be it. Otherwise, the first e-mail address found for them is used.
 
 #### Authenticate Requests
 
-Use `passport.authenticate()`, specifying the `'fellowshipone'` strategy, to
-authenticate requests.
+Use `passport.authenticate()`, specifying the `'fellowshipone'` strategy, to authenticate requests.
 
-For example, as route middleware in an [Express](http://expressjs.com/)
-application:
+For example, as route middleware in an [Express](http://expressjs.com/) application:
 
-    app.get('/auth/fellowshipone',
-      passport.authenticate('fellowshipone'));
-    
-    app.get('/auth/fellowshipone/callback', 
-      passport.authenticate('fellowshipone', { failureRedirect: '/login' }),
-      function(req, res) {
-        // Successful authentication, redirect home.
-        res.redirect('/');
-      });
+```js
+app.get('/auth/fellowshipone',
+  passport.authenticate('fellowshipone'));
+
+app.get('/auth/fellowshipone/callback', 
+  passport.authenticate('fellowshipone', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+```
 
 <!-- Coming soon!
 ## Examples
@@ -68,7 +83,7 @@ For a complete, working example, refer to the [login example](https://github.com
 ## Tests
 
     $ npm install --dev
-    $ npm test
+    $ make test
 
 ## Credits
 
