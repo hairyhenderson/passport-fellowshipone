@@ -1,46 +1,49 @@
 {
-   "name": "passport-fellowshipone",
-   "version": "0.0.1",
-   "description": "Fellowship One (F1) authentication strategy for Passport.",
-   "keywords": [
-      "passport",
-      "fellowshipone",
-      "F1",
-      "auth",
-      "authentication",
-      "identity"
-   ],
-   "repository": {
-      "type": "git",
-      "url": "git://github.com/hairyhenderson/passport-fellowshipone.git"
-   },
-   "bugs": {
-      "url": "http://github.com/hairyhenderson/passport-fellowshipone/issues"
-   },
-   "author": {
-      "name": "Dave Henderson",
-      "email": "dhenderson@gmail.com"
-   },
-   "licenses": [{
+  "name": "passport-fellowshipone",
+  "version": "0.0.2",
+  "description": "Fellowship One (F1) authentication strategy for Passport.",
+  "keywords": [
+    "passport",
+    "fellowshipone",
+    "F1",
+    "auth",
+    "authentication",
+    "identity"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hairyhenderson/passport-fellowshipone.git"
+  },
+  "bugs": {
+    "url": "http://github.com/hairyhenderson/passport-fellowshipone/issues"
+  },
+  "author": {
+    "name": "Dave Henderson",
+    "email": "dhenderson@gmail.com"
+  },
+  "licenses": [
+    {
       "type": "MIT",
       "url": "http://www.opensource.org/licenses/MIT"
-   }],
-   "main": "./lib/passport-fellowshipone",
-   "dependencies": {
-      "passport-oauth": "^1.0.0",
-      "pkginfo": "^0.3.0",
-      "request": "^2.36.0"
-   },
-   "devDependencies": {
-      "istanbul": "^0.2.16",
-      "mocha": "^1.20.1",
-      "should": "^4.0.4",
-      "coveralls": "^2.11.0"
-   },
-   "scripts": {
-      "test": "make test-coveralls"
-   },
-   "engines": {
-      "node": ">= 0.10.0"
-   }
+    }
+  ],
+  "main": "./lib/passport-fellowshipone",
+  "dependencies": {
+    "passport-oauth": "^1.0.0",
+    "pkginfo": "^0.3.0",
+    "request": "^2.36.0"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.0",
+    "istanbul": "^0.2.16",
+    "mocha": "^1.20.1",
+    "should": "^4.0.4",
+    "sinon": "^1.10.2"
+  },
+  "scripts": {
+    "test": "make test-coveralls"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  }
 }
