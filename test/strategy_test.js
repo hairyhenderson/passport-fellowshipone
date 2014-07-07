@@ -5,21 +5,22 @@ var should = require('should'),
    Strategy = require('passport-fellowshipone').Strategy;
 
 describe('passport-fellowshipone strategy', function() {
-   var strategy;
+   var strategy, apiURL, churchCode, staging;
 
-   before(function() {})
+   describe('provider', function() {
+      before(function() {
+         strategy = new Strategy({
+            consumerKey: 'ckey',
+            consumerSecret: 'csecret'
+         }, function() {})
+      })
 
-   it('is named fellowshipone', function() {
-      var strategy = new Strategy({
-         consumerKey: 'ckey',
-         consumerSecret: 'csecret'
-      }, function() {})
-      strategy.name.should.eql('fellowshipone')
+      it('is named fellowshipone', function() {
+         strategy.name.should.eql('fellowshipone')
+      })
    })
 
    describe('options', function() {
-      var apiURL, churchCode, staging;
-
       describe('churchCode', function() {
          before(function() {
             churchCode = 'examplechurch'
@@ -69,6 +70,24 @@ describe('passport-fellowshipone strategy', function() {
          })
          it('sets userAuthorizationURL', function() {
             strategy.options.should.have.property('userAuthorizationURL', apiURL + '/PortalUser/Login')
+         })
+      })
+   })
+
+   describe('userAuthorizationParams', function() {
+      before(function() {
+         apiURL = 'http://example.com'
+         strategy = new Strategy({
+            apiURL: apiURL,
+            consumerKey: 'key',
+            consumerSecret: 'secret'
+         }, function() {})
+      })
+
+      it('sends back oauth_callback', function() {
+         strategy._callbackURL = 'foo'
+         strategy.userAuthorizationParams({}).should.eql({
+            oauth_callback: 'foo'
          })
       })
    })
