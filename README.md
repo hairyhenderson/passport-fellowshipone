@@ -1,7 +1,8 @@
-[![Build Status](https://secure.travis-ci.org/hairyhenderson/passport-fellowshipone.svg)](http://travis-ci.org/hairyhenderson/passport-fellowshipone)
-[![Coverage Status](https://img.shields.io/coveralls/hairyhenderson/passport-fellowshipone.svg)](https://coveralls.io/r/hairyhenderson/passport-fellowshipone)
-[![Dependency Status](https://gemnasium.com/hairyhenderson/passport-fellowshipone.svg)](https://gemnasium.com/hairyhenderson/passport-fellowshipone)
-[![Current Version](https://img.shields.io/npm/v/passport-fellowshipone.svg)](https://www.npmjs.org/package/passport-fellowshipone)
+[![Build Status](http://img.shields.io/travis/hairyhenderson/passport-fellowshipone.svg)](http://travis-ci.org/hairyhenderson/passport-fellowshipone)
+[![Coverage Status](http://img.shields.io/coveralls/hairyhenderson/passport-fellowshipone.svg)](https://coveralls.io/r/hairyhenderson/passport-fellowshipone)
+[![Code Climate](http://img.shields.io/codeclimate/github/hairyhenderson/passport-fellowshipone.svg)](https://codeclimate.com/github/hairyhenderson/passport-fellowshipone)
+[![Dependency Status](http://img.shields.io/gemnasium/hairyhenderson/passport-fellowshipone.svg)](https://gemnasium.com/hairyhenderson/passport-fellowshipone)
+[![Current Version](http://img.shields.io/npm/v/passport-fellowshipone.svg)](https://www.npmjs.org/package/passport-fellowshipone)
 
 # Passport-FellowshipOne
 
