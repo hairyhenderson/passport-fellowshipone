@@ -150,5 +150,36 @@ describe('passport-fellowshipone strategy', function() {
             done()
          })
       })
+
+      it('yields error given empty reply', function(done) {
+         r.expects('get').yields(null, {
+            statusCode: 200
+         })
+
+         strategy.userProfile(null, null, {
+            userURL: 'http://example.com'
+         }, function(err, user) {
+            err.should.exist
+
+            verifyAll()
+            done()
+         })
+      })
+
+      it('yields error given reply object without person property', function(done) {
+         r.expects('get').yields(null, {
+            statusCode: 200
+         }, {})
+
+         strategy.userProfile(null, null, {
+            userURL: 'http://example.com'
+         }, function(err, user) {
+            err.should.exist
+
+            verifyAll()
+            done()
+         })
+      })
+
    })
 })
