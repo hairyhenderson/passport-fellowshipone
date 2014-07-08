@@ -1,6 +1,6 @@
 {
   "name": "passport-fellowshipone",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Fellowship One (F1) authentication strategy for Passport.",
   "keywords": [
     "passport",
