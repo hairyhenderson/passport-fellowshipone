@@ -37,7 +37,6 @@
   },
   "devDependencies": {
     "codeclimate-test-reporter": "0.0.3",
-    "coveralls": "^2.11.0",
     "istanbul": "^0.2.16",
     "jshint": "^2.5.2",
     "mocha": "^1.20.1",
@@ -45,7 +44,7 @@
     "sinon": "^1.10.2"
   },
   "scripts": {
-    "test": "make test-coveralls"
+    "test": "make test-travis"
   },
   "engines": {
     "node": ">= 0.10.0"
