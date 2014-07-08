@@ -49,31 +49,27 @@ describe('passport-fellowshipone strategy', function() {
             strategy.options.should.have.property('apiURL', 'https://' + churchCode + '.fellowshiponeapi.com/v1')
          })
       })
-      describe('staging', function() {
+      describe('apiURL', function() {
          beforeEach(function() {
-            churchCode = 'examplechurch'
+            apiURL = 'http://example.com/api'
             strategy = new Strategy({
-               churchCode: churchCode,
-               staging: true,
+               churchCode: 'foo',
+               apiURL: apiURL,
                consumerKey: 'key',
                consumerSecret: 'secret'
             }, function() {})
          })
 
-         it('adds \'staging\' subdomain to apiURL', function() {
-            strategy.options.should.have.property('apiURL', 'https://' + churchCode + '.staging.fellowshiponeapi.com/v1')
-         })
-      })
-      describe('apiURL', function() {
-         beforeEach(function() {
-            apiURL = 'http://example.com/api'
+         it('supports templating', function() {
             strategy = new Strategy({
-               churchCode: 'ignored',
-               staging: true, // also ignored
-               apiURL: apiURL,
+               churchCode: 'foo',
+               apiVersion: 1,
+               protocol: 'https',
+               apiURL: '{protocol}://{churchCode}.staging.fellowshiponeapi.com/v{apiVersion}',
                consumerKey: 'key',
                consumerSecret: 'secret'
             }, function() {})
+            strategy.options.should.have.property('apiURL', 'https://foo.staging.fellowshiponeapi.com/v1')
          })
 
          it('sets requestTokenURL', function() {

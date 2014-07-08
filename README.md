@@ -41,9 +41,10 @@ passport.use(new FellowshipOneStrategy({
 
 To make life a little easier for dealing with Fellowship One's API, you can set these options:
 
-- `churchCode` - Your Fellowship One Church Code. When set, this will be used to automatically build the `apiURL` option.
-- `staging` - _(boolean)_ Whether or not you want to talk to your F1 staging environment (`true`) or your production environment (default).
-- `apiURL` - The base URL for Fellowship One API operations (i.e. `https://yourchurchcode.fellowshiponeapi.com/v1`). You don't need to set this if you already set `churchCode`/`staging`, but sometimes you've already got the URL for other purposes, so it's just as easy. _Setting this will override the `churchCode` and `staging` options._
+- `churchCode` - Your Fellowship One Church Code. When set, this will be used to automatically build the `apiURL` option. _If you want to use the staging environment, you must also set `apiURL`!_
+- `apiURL` - The base URL for Fellowship One API operations (i.e. `https://{churchCode}.staging.fellowshiponeapi.com/v1`). 
+This is auto-calculated from `churchCode` when not specified, but can be provided here for customizations (i.e. pointing to staging).
+Supports [URI Templating](http://tools.ietf.org/html/rfc6570), using the `options` object to provide properties.
 
 ##### The returned profile
 
