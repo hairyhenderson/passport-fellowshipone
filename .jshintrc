@@ -1,3 +1,5 @@
 {
-  "asi": true
+  "asi": true,
+  "undef": true,
+  "predef": [ "require", "module", "Buffer", "console", "process" ]
 }
