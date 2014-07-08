@@ -10,6 +10,7 @@ describe('passport-fellowshipone strategy', function() {
 
    var r;
    beforeEach(function() {
+      request.get = function() {}
       r = sinon.mock(request)
    })
    afterEach(function() {
@@ -65,7 +66,7 @@ describe('passport-fellowshipone strategy', function() {
       })
       describe('apiURL', function() {
          beforeEach(function() {
-            apiURL = 'http://example.com'
+            apiURL = 'http://example.com/api'
             strategy = new Strategy({
                churchCode: 'ignored',
                staging: true, // also ignored
@@ -127,7 +128,7 @@ describe('passport-fellowshipone strategy', function() {
          })
       })
       it('yields error when GET errors', function(done) {
-         r.expects('get').yields('ERROR')
+         r.expects('get').withArgs('http://example.com').yields('ERROR')
 
          strategy.userProfile(null, null, {
             userURL: 'http://example.com'
@@ -137,8 +138,8 @@ describe('passport-fellowshipone strategy', function() {
             done()
          })
       })
-      it('yields error when GET returns non-OK status', function(done) {
-         r.expects('get').yields(null, {
+      it('yields error when GET returns non-OK statuses', function(done) {
+         r.expects('get').withArgs('http://example.com').yields(null, {
             statusCode: 404
          }, 'not found')
 
@@ -152,7 +153,7 @@ describe('passport-fellowshipone strategy', function() {
       })
 
       it('yields error given empty reply', function(done) {
-         r.expects('get').yields(null, {
+         r.expects('get').withArgs('http://example.com').yields(null, {
             statusCode: 200
          })
 
@@ -166,8 +167,11 @@ describe('passport-fellowshipone strategy', function() {
          })
       })
 
-      it('yields error given reply object without person property', function(done) {
-         r.expects('get').yields(null, {
+      it('yields error given reply object without correct properties', function(done) {
+         r.expects('get').withArgs('http://example.com').yields(null, {
+            statusCode: 200
+         }, {})
+         r.expects('get').withArgs('http://example.com/Communications').yields(null, {
             statusCode: 200
          }, {})
 
@@ -181,5 +185,51 @@ describe('passport-fellowshipone strategy', function() {
          })
       })
 
+      it('yields profile based on F1 Person record', function(done) {
+         var f1person = {
+            person: {
+               '@id': 1234,
+               '@uri': 'http://example.com',
+               firstName: 'John',
+               lastName: 'Doe'
+            }
+         }
+         var f1comms = {
+            communications: {
+               communication: [{
+                  communicationGeneralType: 'Email',
+                  communicationValue: 'john@example.com',
+                  communicationType: {
+                     name: 'Email'
+                  },
+                  preferred: 'false'
+               }]
+            }
+         }
+         var expected = {
+            id: 1234,
+            uri: 'http://example.com',
+            displayName: 'John',
+            fullName: 'John Doe',
+            email: 'john@example.com'
+         }
+
+         r.expects('get').yields(null, {
+            statusCode: 200
+         }, f1person)
+         r.expects('get').yields(null, {
+            statusCode: 200
+         }, f1comms)
+
+         strategy.userProfile(null, null, {
+            userURL: 'http://example.com'
+         }, function(err, user) {
+            should(err).not.exist
+            user.should.eql(expected)
+
+            verifyAll()
+            done()
+         })
+      })
    })
 })
