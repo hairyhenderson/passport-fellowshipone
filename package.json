@@ -36,6 +36,7 @@
     "request": "^2.36.0"
   },
   "devDependencies": {
+    "codeclimate-test-reporter": "0.0.3",
     "coveralls": "^2.11.0",
     "istanbul": "^0.2.16",
     "mocha": "^1.20.1",
