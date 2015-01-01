@@ -18,7 +18,7 @@ This module lets you authenticate using Fellowship One in your Node.js applicati
 
 #### Configure Strategy
 
-The Fellowship One authentication strategy authenticates users using a Fellowship One account and OAuth 1.0a tokens. The strategy requires a `verify` callback, which accepts these credentials and calls `done` providing a user, as well as `options` specifying a developer key and callback URL. 
+The Fellowship One authentication strategy authenticates users using a Fellowship One account and OAuth 1.0a tokens. The strategy requires a `verify` callback, which accepts these credentials and calls `done` providing a user, as well as `options` specifying a developer key and callback URL.
 
 ```js
 var FellowshipOneStrategy = require('passport-fellowshipone').Strategy;
@@ -42,7 +42,7 @@ passport.use(new FellowshipOneStrategy({
 To make life a little easier for dealing with Fellowship One's API, you can set these options:
 
 - `churchCode` - Your Fellowship One Church Code. When set, this will be used to automatically build the `apiURL` option. _If you want to use the staging environment, you must also set `apiURL`!_
-- `apiURL` - The base URL for Fellowship One API operations (i.e. `https://{churchCode}.staging.fellowshiponeapi.com/v1`). 
+- `apiURL` - The base URL for Fellowship One API operations (i.e. `https://{churchCode}.staging.fellowshiponeapi.com/v1`).
 This is auto-calculated from `churchCode` when not specified, but can be provided here for customizations (i.e. pointing to staging).
 Supports [URI Templating](http://tools.ietf.org/html/rfc6570), using the `options` object to provide properties.
 
@@ -68,7 +68,7 @@ For example, as route middleware in an [Express](http://expressjs.com/) applicat
 app.get('/auth/fellowshipone',
   passport.authenticate('fellowshipone'));
 
-app.get('/auth/fellowshipone/callback', 
+app.get('/auth/fellowshipone/callback',
   passport.authenticate('fellowshipone', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
@@ -97,4 +97,4 @@ For a complete, working example, refer to the [login example](https://github.com
 
 [The MIT License](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2014 Dave Henderson
+Copyright (c) 2014-2015 Dave Henderson
