@@ -1,8 +1,8 @@
-[![Build Status](https://img.shields.io/travis/hairyhenderson/passport-fellowshipone.svg)](http://travis-ci.org/hairyhenderson/passport-fellowshipone)
-[![Code Coverage](https://img.shields.io/codeclimate/coverage/github/hairyhenderson/passport-fellowshipone.svg)](https://codeclimate.com/github/hairyhenderson/passport-fellowshipone)
-[![Code Climate](https://img.shields.io/codeclimate/github/hairyhenderson/passport-fellowshipone.svg)](https://codeclimate.com/github/hairyhenderson/passport-fellowshipone)
-[![Dependency Status](https://img.shields.io/gemnasium/hairyhenderson/passport-fellowshipone.svg)](https://gemnasium.com/hairyhenderson/passport-fellowshipone)
-[![Current Version](https://img.shields.io/npm/v/passport-fellowshipone.svg)](https://www.npmjs.org/package/passport-fellowshipone)
+[![Build Status][travis-image]][travis-url]
+[![Code Coverage][coverage-image]][coverage-url]
+[![Code Climate][climate-image]][climate-url]
+[![Dependency Status][gemnasium-image]][gemnasium-url]
+[![Current Version][npm-image]][npm-url]
 
 # Passport-FellowshipOne
 
@@ -98,3 +98,18 @@ For a complete, working example, refer to the [login example](https://github.com
 [The MIT License](http://opensource.org/licenses/MIT)
 
 Copyright (c) 2014-2015 Dave Henderson
+
+[travis-image]: https://img.shields.io/travis/hairyhenderson/passport-fellowshipone.svg?style=flat
+[travis-url]: https://travis-ci.org/hairyhenderson/passport-fellowshipone
+
+[coverage-image]: https://img.shields.io/codeclimate/coverage/github/hairyhenderson/passport-fellowshipone.svg?style=flat
+[coverage-url]: https://codeclimate.com/github/hairyhenderson/passport-fellowshipone
+
+[climate-image]: https://img.shields.io/codeclimate/github/hairyhenderson/passport-fellowshipone.svg?style=flat
+[climate-url]: https://codeclimate.com/github/hairyhenderson/passport-fellowshipone
+
+[gemnasium-image]: https://img.shields.io/gemnasium/hairyhenderson/passport-fellowshipone.svg?style=flat
+[gemnasium-url]: https://gemnasium.com/hairyhenderson/passport-fellowshipone
+
+[npm-image]: https://img.shields.io/npm/v/passport-fellowshipone.svg?style=flat
+[npm-url]: https://npmjs.org/package/passport-fellowshipone
