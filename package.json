@@ -30,18 +30,18 @@
   "main": "./lib/passport-fellowshipone",
   "dependencies": {
     "URIjs": "~1.16.0",
-    "async": "~1.4.0",
+    "async": "~1.4.2",
     "passport-oauth": "~1.0.0",
     "pkginfo": "~0.3.0",
-    "request": "~2.60.0"
+    "request": "~2.61.0"
   },
   "devDependencies": {
     "codeclimate-test-reporter": "~0.1.0",
-    "istanbul": "~0.3.17",
+    "istanbul": "~0.3.19",
     "jshint": "~2.8.0",
-    "mocha": "~2.2.5",
-    "should": "~7.0.2",
-    "sinon": "~1.15.4"
+    "mocha": "~2.3.0",
+    "should": "~7.1.0",
+    "sinon": "~1.16.1"
   },
   "scripts": {
     "test": "make test-travis"
