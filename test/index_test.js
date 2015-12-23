@@ -1,10 +1,8 @@
-'use strict'
-var should = require('should'),
-   util = require('util'),
-   fellowshipone = require('../lib/passport-fellowshipone');
+require('should')
+var fellowshipone = require('../lib/passport-fellowshipone')
 
-describe('passport-fellowshipone', function() {
-   it('should report a version', function() {
-      fellowshipone.version.should.be.a.string
-   })
+describe('passport-fellowshipone', function () {
+  it('should report a version', function () {
+    fellowshipone.version.should.be.a.string
+  })
 })

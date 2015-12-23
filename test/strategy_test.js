@@ -1,67 +1,65 @@
-'use strict'
-var should = require('should'),
-  util = require('util'),
-  sinon = require('sinon'),
-  request = require('request'),
-  Strategy = require('../lib/passport-fellowshipone').Strategy;
+var should = require('should')
+var sinon = require('sinon')
+var request = require('request')
+var Strategy = require('../lib/passport-fellowshipone').Strategy
 
-describe('passport-fellowshipone strategy', function() {
-  var strategy, apiURL, churchCode, staging;
+describe('passport-fellowshipone strategy', function () {
+  var strategy, apiURL, churchCode
 
-  var r;
-  beforeEach(function() {
-    request.get = function() {}
+  var r
+  beforeEach(function () {
+    request.get = function () {}
     r = sinon.mock(request)
   })
-  afterEach(function() {
+  afterEach(function () {
     r.restore()
   })
 
-  function verifyAll() {
+  function verifyAll () {
     r.verify()
   }
 
-  describe('provider', function() {
-    beforeEach(function() {
+  describe('provider', function () {
+    beforeEach(function () {
       strategy = new Strategy({
         consumerKey: 'ckey',
         consumerSecret: 'csecret'
-      }, function() {})
+      }, function () {})
     })
 
-    it('is named fellowshipone', function() {
+    it('is named fellowshipone', function () {
       strategy.name.should.eql('fellowshipone')
     })
   })
 
-  describe('options', function() {
-    describe('churchCode', function() {
-      beforeEach(function() {
+  describe('options', function () {
+    describe('churchCode', function () {
+      beforeEach(function () {
         churchCode = 'examplechurch'
         strategy = new Strategy({
           churchCode: churchCode,
           consumerKey: 'key',
           consumerSecret: 'secret'
-        }, function() {})
+        }, function () {})
       })
 
-      it('sets apiURL', function() {
+      it('sets apiURL', function () {
         strategy.options.should.have.property('apiURL', 'https://' +
           churchCode + '.fellowshiponeapi.com/v1')
       })
     })
-    describe('apiURL', function() {
-      beforeEach(function() {
+    describe('apiURL', function () {
+      beforeEach(function () {
         apiURL = 'http://example.com/api'
         strategy = new Strategy({
           churchCode: 'foo',
           apiURL: apiURL,
           consumerKey: 'key',
           consumerSecret: 'secret'
-        }, function() {})
+        }, function () {})
       })
 
-      it('supports templating', function() {
+      it('supports templating', function () {
         strategy = new Strategy({
           churchCode: 'foo',
           apiVersion: 1,
@@ -69,37 +67,37 @@ describe('passport-fellowshipone strategy', function() {
           apiURL: '{protocol}://{churchCode}.staging.fellowshiponeapi.com/v{apiVersion}',
           consumerKey: 'key',
           consumerSecret: 'secret'
-        }, function() {})
+        }, function () {})
         strategy.options.should.have.property('apiURL',
           'https://foo.staging.fellowshiponeapi.com/v1')
       })
 
-      it('sets requestTokenURL', function() {
+      it('sets requestTokenURL', function () {
         strategy.options.should.have.property('requestTokenURL', apiURL +
           '/Tokens/RequestToken')
       })
-      it('sets accessTokenURL', function() {
+      it('sets accessTokenURL', function () {
         strategy.options.should.have.property('accessTokenURL', apiURL +
           '/Tokens/AccessToken')
       })
-      it('sets userAuthorizationURL', function() {
+      it('sets userAuthorizationURL', function () {
         strategy.options.should.have.property('userAuthorizationURL',
           apiURL + '/PortalUser/Login')
       })
     })
   })
 
-  describe('userAuthorizationParams', function() {
-    beforeEach(function() {
+  describe('userAuthorizationParams', function () {
+    beforeEach(function () {
       apiURL = 'http://example.com'
       strategy = new Strategy({
         apiURL: apiURL,
         consumerKey: 'key',
         consumerSecret: 'secret'
-      }, function() {})
+      }, function () {})
     })
 
-    it('sends back oauth_callback', function() {
+    it('sends back oauth_callback', function () {
       strategy._callbackURL = 'foo'
       strategy.userAuthorizationParams({}).should.eql({
         oauth_callback: 'foo'
@@ -107,60 +105,62 @@ describe('passport-fellowshipone strategy', function() {
     })
   })
 
-  describe('userProfile', function() {
-    beforeEach(function() {
+  describe('userProfile', function () {
+    beforeEach(function () {
       apiURL = 'http://example.com'
       strategy = new Strategy({
         apiURL: apiURL,
         consumerKey: 'key',
         consumerSecret: 'secret'
-      }, function() {})
+      }, function () {})
     })
-    it('yields empty user given no params', function(done) {
-      strategy.userProfile(null, null, null, function(err, user) {
+    it('yields empty user given no params', function (done) {
+      strategy.userProfile(null, null, null, function (err, user) {
+        should(err).not.exist
         user.should.eql({})
         done()
       })
     })
-    it('yields empty user given no userURL in params', function(done) {
-      strategy.userProfile(null, null, {}, function(err, user) {
+    it('yields empty user given no userURL in params', function (done) {
+      strategy.userProfile(null, null, {}, function (err, user) {
+        should(err).not.exist
         user.should.eql({})
         done()
       })
     })
-    it('yields error when GET errors', function(done) {
+    it('yields error when GET errors', function (done) {
       r.expects('get').withArgs('http://example.com').yields('ERROR')
 
       strategy.userProfile(null, null, {
         userURL: 'http://example.com'
-      }, function(err, user) {
+      }, function (err, user) {
         err.should.exist
         verifyAll()
         done()
       })
     })
-    it('yields error when GET returns non-OK statuses', function(done) {
+    it('yields error when GET returns non-OK statuses', function (done) {
       r.expects('get').withArgs('http://example.com').yields(null, {
         statusCode: 404
       }, 'not found')
 
       strategy.userProfile(null, null, {
         userURL: 'http://example.com'
-      }, function(err, user) {
+      }, function (err, user) {
         err.should.exist
         verifyAll()
         done()
       })
     })
 
-    it('yields error given empty reply', function(done) {
+    it('yields error given empty reply', function (done) {
       r.expects('get').withArgs('http://example.com').yields(null, {
         statusCode: 200
       })
 
       strategy.userProfile(null, null, {
         userURL: 'http://example.com'
-      }, function(err, user) {
+      }, function (err, user) {
         err.should.exist
 
         verifyAll()
@@ -169,7 +169,7 @@ describe('passport-fellowshipone strategy', function() {
     })
 
     it('yields error given reply object without correct properties',
-      function(done) {
+      function (done) {
         r.expects('get').withArgs('http://example.com').yields(null, {
           statusCode: 200
         }, {})
@@ -180,7 +180,7 @@ describe('passport-fellowshipone strategy', function() {
 
         strategy.userProfile(null, null, {
           userURL: 'http://example.com'
-        }, function(err, user) {
+        }, function (err, user) {
           err.should.exist
 
           verifyAll()
@@ -188,7 +188,7 @@ describe('passport-fellowshipone strategy', function() {
         })
       })
 
-    it('yields profile based on F1 Person record', function(done) {
+    it('yields profile based on F1 Person record', function (done) {
       var f1person = {
         person: {
           '@id': 1234,
@@ -226,7 +226,7 @@ describe('passport-fellowshipone strategy', function() {
 
       strategy.userProfile(null, null, {
         userURL: 'http://example.com'
-      }, function(err, user) {
+      }, function (err, user) {
         should(err).not.exist
         user.should.eql(expected)
 
@@ -236,30 +236,30 @@ describe('passport-fellowshipone strategy', function() {
     })
   })
 
-  describe('_getOAuthAccessToken', function() {
-    var s;
-    beforeEach(function() {
+  describe('_getOAuthAccessToken', function () {
+    var s
+    beforeEach(function () {
       s = sinon.mock(strategy)
       strategy._clientOptions = {}
     })
-    afterEach(function() {
+    afterEach(function () {
       s.restore()
     })
 
-    function verifyAll() {
+    function verifyAll () {
       r.verify()
       s.verify()
     }
-    it('errors when _performSecureRequest yields error', function(done) {
+    it('errors when _performSecureRequest yields error', function (done) {
       s.expects('_performSecureRequest').yields('ERROR')
 
-      strategy._getOAuthAccessToken('', '', function(err, token, secret, params) {
+      strategy._getOAuthAccessToken('', '', function (err, token, secret, params) {
         err.should.eql('ERROR')
         verifyAll()
         done()
       })
     })
-    it('responds with userURL in params', function(done) {
+    it('responds with userURL in params', function (done) {
       var userURL = 'http://example.com/user/1234'
       var data = 'oauth_token=tok&oauth_token_secret=sec'
       s.expects('_performSecureRequest').yields(null, data, {
@@ -268,7 +268,7 @@ describe('passport-fellowshipone strategy', function() {
         }
       })
 
-      strategy._getOAuthAccessToken(null, null, function(err, token, secret, params) {
+      strategy._getOAuthAccessToken(null, null, function (err, token, secret, params) {
         should(err).not.exist
         params.should.have.property('userURL', userURL)
         token.should.eql('tok')
