@@ -24,21 +24,19 @@
   "license": "MIT",
   "main": "./lib/passport-fellowshipone",
   "dependencies": {
-    "async": "^1.5.1",
+    "async": "^1.5.2",
     "passport-oauth": "^1.0.0",
     "pkginfo": "^0.3.1",
-    "request": "^2.67.0",
+    "request": "^2.69.0",
     "urijs": "^1.17.0"
   },
   "devDependencies": {
     "codeclimate-test-reporter": "^0.3.0",
-    "istanbul": "^0.4.0",
-    "jshint": "^2.9.1-rc1",
-    "mocha": "^2.3.4",
-    "npm": "^3.5.2",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.4.5",
     "nsp": "^2.2.0",
-    "should": "^8.0.2",
-    "sinon": "^1.17.2",
+    "should": "^8.2.1",
+    "sinon": "^1.17.3",
     "standard": "^5.4.1"
   },
   "scripts": {
