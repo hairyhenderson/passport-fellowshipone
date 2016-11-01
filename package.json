@@ -43,7 +43,7 @@
     "test": "make test-travis"
   },
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 4"
   },
   "standard": {
     "globals": [
