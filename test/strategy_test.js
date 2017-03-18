@@ -116,14 +116,14 @@ describe('passport-fellowshipone strategy', function () {
     })
     it('yields empty user given no params', function (done) {
       strategy.userProfile(null, null, null, function (err, user) {
-        should(err).not.exist
+        should.not.exist(err)
         user.should.eql({})
         done()
       })
     })
     it('yields empty user given no userURL in params', function (done) {
       strategy.userProfile(null, null, {}, function (err, user) {
-        should(err).not.exist
+        should.not.exist(err)
         user.should.eql({})
         done()
       })
@@ -134,7 +134,7 @@ describe('passport-fellowshipone strategy', function () {
       strategy.userProfile(null, null, {
         userURL: 'http://example.com'
       }, function (err, user) {
-        err.should.exist
+        should.exist(err)
         verifyAll()
         done()
       })
@@ -147,7 +147,7 @@ describe('passport-fellowshipone strategy', function () {
       strategy.userProfile(null, null, {
         userURL: 'http://example.com'
       }, function (err, user) {
-        err.should.exist
+        should.exist(err)
         verifyAll()
         done()
       })
@@ -161,7 +161,7 @@ describe('passport-fellowshipone strategy', function () {
       strategy.userProfile(null, null, {
         userURL: 'http://example.com'
       }, function (err, user) {
-        err.should.exist
+        should.exist(err)
 
         verifyAll()
         done()
@@ -181,7 +181,7 @@ describe('passport-fellowshipone strategy', function () {
         strategy.userProfile(null, null, {
           userURL: 'http://example.com'
         }, function (err, user) {
-          err.should.exist
+          should.exist(err)
 
           verifyAll()
           done()
@@ -227,7 +227,7 @@ describe('passport-fellowshipone strategy', function () {
       strategy.userProfile(null, null, {
         userURL: 'http://example.com'
       }, function (err, user) {
-        should(err).not.exist
+        should.not.exist(err)
         user.should.eql(expected)
 
         verifyAll()
@@ -269,8 +269,8 @@ describe('passport-fellowshipone strategy', function () {
       })
 
       strategy._getOAuthAccessToken(null, null, function (err, token, secret, params) {
-        should(err).not.exist
-        params.should.have.property('userURL', userURL)
+        should.not.exist(err)
+        should(params).have.property('userURL', userURL)
         token.should.eql('tok')
         secret.should.eql('sec')
         verifyAll()
