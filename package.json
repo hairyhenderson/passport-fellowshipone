@@ -37,7 +37,7 @@
     "nsp": "^2.2.0",
     "should": "^11.0.0",
     "sinon": "^4.0.0",
-    "standard": "^10.0.0"
+    "standard": "^14.0.2"
   },
   "scripts": {
     "test": "make test-travis"
